@@ -6,6 +6,13 @@ const getStdin = require("get-stdin");
 
 let fileContents, pattern;
 
+let args = process.argv.slice(2);
+let outputJSON = false;
+if (args[0] === '-j') {
+  outputJSON = true;
+  args = args.slice(1);
+};
+
 function printUsage(code = 0) {
   console.log(`
 Usage: shift-query file.js query-pattern
@@ -17,8 +24,8 @@ If a script is piped to shift-query then the second argument is treated as the q
 
 (async () => {
   if (process.stdin.isTTY) {
-    const file = process.argv[2];
-    pattern = process.argv[3];
+    const file = args[0];
+    pattern = args[1];
 
     if (!file || !pattern) printUsage(1);
     try {
@@ -29,7 +36,7 @@ If a script is piped to shift-query then the second argument is treated as the q
     }
   } else {
     fileContents = await getStdin();
-    pattern = process.argv[2];
+    pattern = args[0];
     if (!fileContents || !pattern) printUsage(1);
   }
 
@@ -44,5 +51,5 @@ If a script is piped to shift-query then the second argument is treated as the q
 
   const result = query(ast, pattern);
 
-  console.log(result);
+  console.log(outputJSON ? JSON.stringify(result) : result);
 })();

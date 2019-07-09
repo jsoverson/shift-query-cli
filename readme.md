@@ -10,7 +10,7 @@ $ npm install -g shift-query-cli
 
 ## Usage
 
-Usage: shift-query file.js query-pattern
+Usage: shift-query [-j] file.js query-pattern
 
 ```bash
 $ shift-query test.js IdentifierExpression
@@ -59,6 +59,24 @@ $ tail +2 shift-query | shift-query IdentifierExpression
   IdentifierExpression { type: 'IdentifierExpression', name: 'pattern' },
   IdentifierExpression { type: 'IdentifierExpression', name: 'console' },
   IdentifierExpression { type: 'IdentifierExpression', name: 'result' } ]
+```
+
+## Outputting JSON
+
+Output JSON with the `-j` flag.
+
+```bash
+$ shift-query -j test.js "[params.items.length=0]"
+```
+
+```bash
+$ shift-query -j test.js LiteralStringExpression | jq .[].value
+"puppeteer"
+"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36"
+"en-US,en;q=0.9"
+"1"
+"https://www.google.com/"
+"ss.png"
 ```
 
 ## Query syntax
