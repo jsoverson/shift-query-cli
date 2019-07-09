@@ -1,6 +1,6 @@
 {
   "name": "shift-query-cli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Command line tool to query AST nodes in JavaScript source files",
   "main": "shift-query",
   "bin": "shift-query",
