@@ -1,0 +1,33 @@
+{
+  "name": "shift-query-cli",
+  "version": "1.0.0",
+  "description": "Command line tool to query AST nodes in JavaScript source files",
+  "main": "shift-query",
+  "bin": "shift-query",
+  "scripts": {},
+  "preferGlobal": false,
+  "author": "Jarrod Overson",
+  "files": [
+    "shift-query.js",
+    "parser.js",
+    "license.txt",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsoverson/shift-query-cli.git"
+  },
+  "keywords": [
+    "ast",
+    "shift",
+    "ecmascript",
+    "javascript",
+    "query"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "get-stdin": "^7.0.0",
+    "shift-parser": "^7.0.0",
+    "shift-query": "^1.0.0"
+  }
+}

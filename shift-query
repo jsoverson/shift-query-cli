@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+const { parseScript } = require("shift-parser");
+const query = require("shift-query");
+const getStdin = require("get-stdin");
+
+let fileContents, pattern;
+
+function printUsage(code = 0) {
+  console.log(`
+Usage: shift-query file.js query-pattern
+
+If a script is piped to shift-query then the second argument is treated as the query pattern
+`);
+  process.exit(code);
+}
+
+(async () => {
+  if (process.stdin.isTTY) {
+    const file = process.argv[2];
+    pattern = process.argv[3];
+
+    if (!file || !pattern) printUsage(1);
+    try {
+      fileContents = require("fs").readFileSync(file, { encoding: "utf8" });
+    } catch (e) {
+      console.error(`Can not read file`);
+      process.exit(2);
+    }
+  } else {
+    fileContents = await getStdin();
+    pattern = process.argv[2];
+    if (!fileContents || !pattern) printUsage(1);
+  }
+
+  let ast;
+
+  try {
+    ast = parseScript(fileContents);
+  } catch (e) {
+    console.error(`Could not parse script: ${e.description}`);
+    process.exit(3);
+  }
+
+  const result = query(ast, pattern);
+
+  console.log(result);
+})();
