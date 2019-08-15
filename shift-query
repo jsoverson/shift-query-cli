@@ -7,7 +7,8 @@ const getStdin = require("get-stdin");
 let fileContents, pattern;
 
 let args = process.argv.slice(2);
-let outputJSON = false;
+let outputJSON = process.stdout.isTTY;
+
 if (args[0] === '-j') {
   outputJSON = true;
   args = args.slice(1);
@@ -17,10 +18,12 @@ function printUsage(code = 0) {
   console.log(`
 Usage: shift-query file.js query-pattern
 
-If a script is piped to shift-query then the second argument is treated as the query pattern
+If a script is piped to shift-query then the first argument is treated as the query pattern
 `);
   process.exit(code);
 }
+
+console.log(process.stdout.isTTY);
 
 (async () => {
   if (process.stdin.isTTY) {

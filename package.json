@@ -7,12 +7,10 @@
     "shift-query": "./shift-query"
   },
   "scripts": {},
-  "preferGlobal": false,
+  "preferGlobal": true,
   "author": "Jarrod Overson",
   "files": [
-    "shift-query.js",
-    "parser.js",
-    "license.txt",
+    "shift-query",
     "README.md"
   ],
   "repository": {
