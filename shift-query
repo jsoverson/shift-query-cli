@@ -7,7 +7,7 @@ const getStdin = require("get-stdin");
 let fileContents, pattern;
 
 let args = process.argv.slice(2);
-let outputJSON = process.stdout.isTTY;
+let outputJSON = !process.stdout.isTTY;
 
 if (args[0] === '-j') {
   outputJSON = true;
